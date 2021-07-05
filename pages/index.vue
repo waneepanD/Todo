@@ -14,14 +14,15 @@
     </div>
     Search: <input v-model="searchText" type="text" />
 
-    <div>
+    <div class="sectionList">
       <p>List</p>
-      <ul>
+      <ul v-if="result.length">
         <li v-for="(item, index) in result" :key="index">
           <p>name: {{ item.name }}</p>
           <p>age: {{ item.age }}</p>
         </li>
       </ul>
+      <p v-else>No result</p>
     </div>
   </div>
 </template>
@@ -87,7 +88,10 @@ export default {
   background: green;
   color: #fff;
   border: none;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 5px;
+}
+.sectionList li{
+  list-style: none;
 }
 </style>
