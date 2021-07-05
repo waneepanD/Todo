@@ -35,6 +35,17 @@ export default {
       searchText: ""
     };
   },
+  computed: {
+    result() {
+      const searchResult = this.list.filter(item => {
+        return (
+          item.name.toLowerCase().search(this.searchText) > -1 ||
+          item.age.search(this.searchText) > -1
+        );
+      });
+      return searchResult;
+    }
+  },
   methods: {
     submit() {
       if (this.$refs.name.value !== "" && this.$refs.age.value !== "") {
@@ -49,17 +60,6 @@ export default {
       }
     }
   },
-  computed: {
-    result() {
-      const searchResult = this.list.filter(item => {
-        return (
-          item.name.toLowerCase().search(this.searchText) > -1 ||
-          item.age.search(this.searchText) > -1
-        );
-      });
-      return searchResult;
-    }
-  }
 };
 </script>
 <style scoped>
