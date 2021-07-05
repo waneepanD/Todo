@@ -3,11 +3,11 @@
     <div class="title">Todo</div>
     <div class="section">
       <div class="sectionInput">
-        <div>Name:</div>
+        <div class="text">Name:</div>
         <input ref="name" type="text" />
       </div>
       <div class="sectionInput">
-        <div>Age:</div>
+        <div class="text">Age:</div>
         <input ref="age" type="number" />
       </div>
       <button class="submit" @click="submit">Submit</button>
@@ -83,6 +83,11 @@ export default {
 }
 .sectionInput {
   margin-bottom: 10px;
+  display: flex;
+}
+.text{
+  flex:0 0 auto ;
+  width: 80px;
 }
 .submit {
   background: green;
