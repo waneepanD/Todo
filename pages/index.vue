@@ -4,13 +4,14 @@
     <div class="section">
       <div class="sectionInput">
         <div class="text">Name:</div>
-        <input ref="name" type="text" />
+        <input v-model="name" type="text" />
       </div>
       <div class="sectionInput">
         <div class="text">Age:</div>
-        <input ref="age" type="number" />
+        <input v-model="age" type="number" />
       </div>
-      <button class="submit" @click="submit">Submit</button>
+      <!-- <button class="submit" @click="submit">Submit</button> -->
+      <button class="submit" @click="addTodo">Submit</button>
     </div>
     Search: <input v-model="searchText" type="text" />
 
@@ -31,13 +32,14 @@
 export default {
   data() {
     return {
-      list: [],
+      name:'',
+      age:'',
       searchText: ""
     };
   },
   computed: {
     result() {
-      const searchResult = this.list.filter(item => {
+      const searchResult = this.$store.state.todo.list.filter(item => {
         return (
           item.name.toLowerCase().search(this.searchText) > -1 ||
           item.age.search(this.searchText) > -1
@@ -47,15 +49,25 @@ export default {
     }
   },
   methods: {
-    submit() {
-      if (this.$refs.name.value !== "" && this.$refs.age.value !== "") {
-        this.list.push({
-          name: this.$refs.name.value,
-          age: this.$refs.age.value
-        });
-        this.$refs.name.value = "";
-        this.$refs.age.value = "";
-      } else {
+    // submit() {
+    //   if (this.name !== "" && this.age !== "") {
+    //     this.list.push({
+    //       name: this.name,
+    //       age: this.age,
+    //     });
+    //     this.name = "";
+    //     this.age = "";
+    //   } else {
+    //     alert("Please enter name and age");
+    //   }
+    // }
+    addTodo() {
+      if(this.name !== "" && this.age !== "") {
+        this.$store.commit('todo/addTodo', {name: this.name, age: this.age})
+        this.name = "";
+        this.age = "";
+      }
+      else {
         alert("Please enter name and age");
       }
     }
